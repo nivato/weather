@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Weather</title>
+		<meta name="author" content="Nazar Ivato" />
+		<link rel="shortcut icon" href="weather.ico">
+		<script src="js/lib/jquery-1.11.1.min.js"></script>
+		<script src="js/lib/bootstrap.min.js"></script>
+		<script src="js/lib/angular.min.js"></script>
+		<script src="js/weather.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/weather.css">
+	</head>
+	<body>
+		<div class="page-header">
+			<h1>&nbsp; Current Weather <small>in your city</small></h1>
+		</div>
+		
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4"> </div>
+				<div class="col-md-4">
+					
+					<form class="form">
+						<div class="form-group">
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Enter your city">
+								<span class="input-group-addon btn btn-default"><span class="glyphicon glyphicon-search"> </span></span>
+							</div>
+						</div>
+					</form>
+					
+					<div class="panel panel-default">
+						<div class="panel-heading"><strong>Lviv </strong><span class="badge pull-right">42 &deg;C</span></div>
+						<div class="panel-body">
+							<img class="icon pull-right" src="img/01d.png" alt="Clear" />
+							<div><strong>Temperature: </strong>42&deg;C</div>
+							<div><strong>Pressure: </strong>42mm</div>
+							<div><strong>Humidity: </strong>70%</div>
+							<div><strong>Weather: </strong>Sky is Clear</div>
+						</div>
+					</div>
+					
+				</div>
+				<div class="col-md-4"> </div>
+			</div>
+		</div>
+	</body>
+</html>
