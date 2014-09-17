@@ -27,13 +27,13 @@
 					<form class="form" ng-submit="cts.submitCity()">
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Enter your city" ng-model="cts.enteredCity" />
+								<input type="text" class="form-control" placeholder="Enter your city" ng-model="cts.enteredCity" required ng-trim="false" />
 								<span class="input-group-addon btn btn-default" ng-click="cts.submitCity()"><span class="glyphicon glyphicon-search"> </span></span>
 							</div>
 						</div>
 					</form>
 					
-					<div class="panel panel-default" ng-repeat="city in cts.cities track by $index" ng-controller="WeatherController as wthr" ng-init="wthr.initiate(city)">
+					<div class="panel panel-default" ng-repeat="city in cts.cities" ng-controller="WeatherController as wthr" ng-init="wthr.initiate(city)">
 						<div class="panel-heading">
 							<button type="button" class="close pull-left" ng-click="cts.removeCity(city)"><span aria-hidden="true">&times;</span></button>
 							<strong>{{wthr.city}}, {{wthr.country}} </strong>
