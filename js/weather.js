@@ -2,22 +2,22 @@
     var app = angular.module('WeatherInCity', []);
     
     app.controller('CitiesController', function(){
-    	this.cities = [];
-    	this.enteredCity = '';
-    	
-    	this.submitCity = function(){
-    	    if ((this.cities.indexOf(this.enteredCity) === -1) && (this.enteredCity.replace(/\s+/, '').length > 0)){
-    	        this.cities.push(this.enteredCity);
-    		}
-    		this.enteredCity = '';
-    	};
-    	
-    	this.removeCity = function(cityName){
-    	    var position = this.cities.indexOf(cityName);
-    	    if (position >= 0){
-    	        this.cities.splice(position, 1);
-    	    }
-    	};
+        this.cities = [];
+        this.enteredCity = '';
+        
+        this.submitCity = function(){
+            if ((this.cities.indexOf(this.enteredCity) === -1) && (this.enteredCity.replace(/\s+/, '').length > 0)){
+                this.cities.push(this.enteredCity);
+            }
+            this.enteredCity = '';
+        };
+        
+        this.removeCity = function(cityName){
+            var position = this.cities.indexOf(cityName);
+            if (position >= 0){
+                this.cities.splice(position, 1);
+            }
+        };
     });
     
     app.controller('WeatherController', ['$http', function($http){
