@@ -33,14 +33,18 @@
 						</div>
 					</form>
 					
-					<div class="panel panel-default" ng-repeat="city in cts.cities">
-						<div class="panel-heading"><strong>{{city}} </strong><span class="badge pull-right">42 &deg;C</span></div>
+					<div class="panel panel-default" ng-repeat="city in cts.cities track by $index" ng-controller="WeatherController as wthr" ng-init="wthr.initiate(city)">
+						<div class="panel-heading">
+							<button type="button" class="close pull-left" ng-click="cts.removeCity(city)"><span aria-hidden="true">&times;</span></button>
+							<strong>{{wthr.city}}, {{wthr.country}} </strong>
+							<span class="badge pull-right">{{wthr.temperature}} &deg;C</span>
+						</div>
 						<div class="panel-body">
-							<img class="icon pull-right" src="img/01d.png" alt="Clear" />
-							<div><strong>Temperature: </strong>42&deg;C</div>
-							<div><strong>Pressure: </strong>42mm</div>
-							<div><strong>Humidity: </strong>70%</div>
-							<div><strong>Weather: </strong>Sky is Clear</div>
+							<img class="icon pull-right" ng-src="img/{{wthr.icon}}" alt="{{wthr.weather}}" />
+							<div><strong>Temperature: </strong>{{wthr.temperature}}&deg;C</div>
+							<div><strong>Pressure: </strong>{{wthr.pressure}} hPa</div>
+							<div><strong>Humidity: </strong>{{wthr.humidity}}%</div>
+							<div><strong>Weather: </strong>{{wthr.weather}}</div>
 						</div>
 					</div>
 					

@@ -2,3 +2,7 @@
 	width: 80px;
 	height: 80px;
 }
+
+.close.pull-left {
+	margin-right: 10px;
+}
