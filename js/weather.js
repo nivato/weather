@@ -7,7 +7,6 @@
     	
     	this.submitCity = function(){
     	    if ((this.cities.indexOf(this.enteredCity) === -1) && (this.enteredCity.replace(/\s+/, '').length > 0)){
-    	        console.log(this.enteredCity);
     	        this.cities.push(this.enteredCity);
     		}
     		this.enteredCity = '';
