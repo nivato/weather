@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="WeatherInCity">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +14,7 @@
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/weather.css">
 	</head>
-	<body>
+	<body ng-controller="CitiesController as cts">
 		<div class="page-header">
 			<h1>&nbsp; Current Weather <small>in your city</small></h1>
 		</div>
@@ -24,17 +24,17 @@
 				<div class="col-md-4"> </div>
 				<div class="col-md-4">
 					
-					<form class="form">
+					<form class="form" ng-submit="cts.submitCity()">
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Enter your city">
-								<span class="input-group-addon btn btn-default"><span class="glyphicon glyphicon-search"> </span></span>
+								<input type="text" class="form-control" placeholder="Enter your city" ng-model="cts.enteredCity" />
+								<span class="input-group-addon btn btn-default" ng-click="cts.submitCity()"><span class="glyphicon glyphicon-search"> </span></span>
 							</div>
 						</div>
 					</form>
 					
-					<div class="panel panel-default">
-						<div class="panel-heading"><strong>Lviv </strong><span class="badge pull-right">42 &deg;C</span></div>
+					<div class="panel panel-default" ng-repeat="city in cts.cities">
+						<div class="panel-heading"><strong>{{city}} </strong><span class="badge pull-right">42 &deg;C</span></div>
 						<div class="panel-body">
 							<img class="icon pull-right" src="img/01d.png" alt="Clear" />
 							<div><strong>Temperature: </strong>42&deg;C</div>
