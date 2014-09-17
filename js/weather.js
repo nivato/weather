@@ -37,7 +37,7 @@
                     if (data.cod && data.cod === 200){
                         controller.city = data.name;
                         controller.country = data.sys.country;
-                        controller.temperature = data.main.temp;
+                        controller.temperature = data.main.temp.toFixed(0);
                         controller.pressure = data.main.pressure;
                         controller.humidity = data.main.humidity;
                         controller.weather = data.weather[0].main + ' (' + data.weather[0].description + ')';
