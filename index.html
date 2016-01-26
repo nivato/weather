@@ -10,26 +10,27 @@
 		<script src="js/lib/jquery-1.11.1.min.js"></script>
 		<script src="js/lib/bootstrap.min.js"></script>
 		<script src="js/lib/angular.min.js"></script>
-		<script src="js/weather.js"></script>
-		<script src="js/service.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/controllers/cities.js"></script>
+		<script src="js/services/weather.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/weather.css">
 	</head>
 	<body ng-controller="CitiesController as cts">
 		<div class="container">
 		    <div class="page-header">
-                <h1>&nbsp; <span class="glyphicon glyphicon-certificate"></span> Weather <small>in your city</small></h1>
+                <h1>&nbsp;<span class="glyphicon glyphicon-certificate"></span> Weather <small>in your city</small></h1>
             </div>
 
 			<div class="row">
 				<div class="col-md-4"> </div>
 				<div class="col-md-4">
 
-					<form class="form" ng-submit="cts.submitCity()">
-						<div class="form-group">
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Enter your city" ng-model="cts.enteredCity" required ng-trim="false" />
-								<div class="input-group-btn">
+                    <form class="form" ng-submit="cts.submitCity()">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Enter your city" ng-model="cts.enteredCity" required ng-trim="false" />
+                                <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
                                     <ul class="dropdown-menu dropdown-menu-right">
                                         <li ng-repeat="cityOption in cts.cityOptions">
@@ -39,13 +40,133 @@
                                         </li>
                                     </ul>
                                 </div>
-							</div>
-						</div>
-					</form>
+                            </div>
+                        </div>
+                    </form>
 
-			    </div>
+				</div>
 			    <div class="col-md-4"> </div>
 		    </div>
+
+		    <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        5 Day Weather Forecast:
+                        <strong>Kyiv, UA </strong>
+                        <span class="badge pull-right">20 &deg;C</span>
+                    </div>
+                    <div class="panel-body">
+        		        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center text-muted"><span class="glyphicon glyphicon-time"></span> 00:00</th>
+                                    <th class="text-center text-muted"><span class="glyphicon glyphicon-time"></span> 03:00</th>
+                                    <th class="text-center text-muted"><span class="glyphicon glyphicon-time"></span> 06:00</th>
+                                    <th class="text-center text-muted"><span class="glyphicon glyphicon-time"></span> 09:00</th>
+                                    <th class="text-center text-muted"><span class="glyphicon glyphicon-time"></span> 12:00</th>
+                                    <th class="text-center text-muted"><span class="glyphicon glyphicon-time"></span> 15:00</th>
+                                    <th class="text-center text-muted"><span class="glyphicon glyphicon-time"></span> 18:00</th>
+                                    <th class="text-center text-muted"><span class="glyphicon glyphicon-time"></span> 21:00</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="list-group">
+                                            <a class="list-group-item">Item</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="list-group">
+                                            <a class="list-group-item">Item</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="list-group">
+                                            <a class="list-group-item">Item</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="list-group">
+                                            <a class="list-group-item">Item</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="list-group">
+                                            <a class="list-group-item">Item</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="list-group">
+                                            <a class="list-group-item">Item</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="list-group">
+                                            <a class="list-group-item">Item</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="list-group">
+                                            <a class="list-group-item">Item</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">
+                                        <div class="list-group">
+                                            <a class="list-group-item">
+                                                <span class="glyphicon glyphicon-calendar"></span> Mon <br /><small>Mar 25 2016</small>
+                                            </a>
+                                        </div>
+                                    </th>
+                                    <th class="text-center">
+                                        <div class="list-group">
+                                            <a class="list-group-item">
+                                                <span class="glyphicon glyphicon-calendar"></span> Tue <br /><small>Mar 26 2016</small>
+                                            </a>
+                                        </div>
+                                    </th>
+                                    <th class="text-center">
+                                        <div class="list-group">
+                                            <a class="list-group-item">
+                                                <span class="glyphicon glyphicon-calendar"></span> Wed <br /><small>Mar 27 2016</small>
+                                            </a>
+                                        </div>
+                                    </th>
+                                    <th class="text-center">
+                                        <div class="list-group">
+                                            <a class="list-group-item">
+                                                <span class="glyphicon glyphicon-calendar"></span> Thu <br /><small>Mar 28 2016</small>
+                                            </a>
+                                        </div>
+                                    </th>
+                                    <th class="text-center">
+                                        <div class="list-group">
+                                            <a class="list-group-item">
+                                                <span class="glyphicon glyphicon-calendar"></span> Fri <br /><small>Mar 29 2016</small>
+                                            </a>
+                                        </div>
+                                    </th>
+                                    <th class="text-center">
+                                        <div class="list-group">
+                                            <a class="list-group-item">
+                                                <span class="glyphicon glyphicon-calendar"></span> Sat <br /><small>Mar 30 2016</small>
+                                            </a>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                    </div>
+                </div>
+		    </div>
+
             <div class="row">
 
                 <div class="col-md-4" ng-repeat="(cityName, city) in cts.cities">
@@ -53,6 +174,9 @@
                         <div class="panel-heading">
                             <button type="button" class="close pull-left" ng-click="cts.removeCity(cityName)"><span aria-hidden="true">&times;</span></button>
                             <strong>{{city.name}}, {{city.country}} </strong>
+                            <button class="btn btn-default btn-xs" ng-click="cts.getForecast(city.name, city.country)">
+                                <span class="glyphicon glyphicon-stats"></span>
+                            </button>
                             <span class="badge pull-right">{{city.temperature}} &deg;C</span>
                         </div>
                         <div class="panel-body">
