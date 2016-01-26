@@ -1,50 +1,25 @@
 (function(){
     var app = angular.module('WeatherInCity', []);
-    
-    app.controller('CitiesController', function(){
-        this.cities = [];
+
+    app.controller('CitiesController', ['$weather', function($weather){
+        this.cityOptions = ['Lviv', 'Kiev', 'London', 'New York', 'Warsaw', 'Paris', 'Berlin'];
+        this.cities = $weather.cities;
         this.enteredCity = '';
-        
-        this.submitCity = function(){
-            if ((this.cities.indexOf(this.enteredCity) === -1) && (this.enteredCity.replace(/\s+/, '').length > 0)){
-                this.cities.push(this.enteredCity);
+
+        this.submitCity = function(city){
+            if (city){
+                this.enteredCity = city;
+            }
+            $weather.add(this.enteredCity);
+            if (this.cityOptions.indexOf(this.enteredCity) === -1){
+                this.cityOptions.push(this.enteredCity);
             }
             this.enteredCity = '';
         };
-        
-        this.removeCity = function(cityName){
-            var position = this.cities.indexOf(cityName);
-            if (position >= 0){
-                this.cities.splice(position, 1);
-            }
-        };
-    });
-    
-    app.controller('WeatherController', ['$http', function($http){
-        var controller = this;
-        this.city = 'N/A';
-        this.country = 'N/A';
-        this.temperature = 0;
-        this.pressure = 0;
-        this.humidity = 0;
-        this.weather = 'N/A';
-        this.icon = 'na.png';
-        
-        this.initiate = function(cityName){
-            this.city = cityName;
-            $http.get('http://api.openweathermap.org/data/2.5/weather?q=' + cityName.replace(' ', '+') + '&units=metric')
-                .success(function(data){
-                    if (data.cod && data.cod === 200){
-                        controller.city = data.name;
-                        controller.country = data.sys.country;
-                        controller.temperature = data.main.temp.toFixed(0);
-                        controller.pressure = data.main.pressure;
-                        controller.humidity = data.main.humidity;
-                        controller.weather = data.weather[0].main + ' (' + data.weather[0].description + ')';
-                        controller.icon = data.weather[0].icon + '.png';
-                    }
-                });
+
+        this.removeCity = function(city){
+            $weather.remove(city);
         };
     }]);
-    
+
 })();

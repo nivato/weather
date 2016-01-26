@@ -11,45 +11,60 @@
 		<script src="js/lib/bootstrap.min.js"></script>
 		<script src="js/lib/angular.min.js"></script>
 		<script src="js/weather.js"></script>
+		<script src="js/service.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/weather.css">
 	</head>
 	<body ng-controller="CitiesController as cts">
-		<div class="page-header">
-			<h1>&nbsp; Current Weather <small>in your city</small></h1>
-		</div>
-		
 		<div class="container">
+		    <div class="page-header">
+                <h1>&nbsp; <span class="glyphicon glyphicon-certificate"></span> Weather <small>in your city</small></h1>
+            </div>
+
 			<div class="row">
 				<div class="col-md-4"> </div>
 				<div class="col-md-4">
-					
+
 					<form class="form" ng-submit="cts.submitCity()">
 						<div class="form-group">
 							<div class="input-group">
 								<input type="text" class="form-control" placeholder="Enter your city" ng-model="cts.enteredCity" required ng-trim="false" />
-								<span class="input-group-addon btn btn-default" ng-click="cts.submitCity()"><span class="glyphicon glyphicon-search"> </span></span>
+								<div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li ng-repeat="cityOption in cts.cityOptions">
+                                            <a href="#" ng-click="cts.submitCity(cityOption)">
+                                                <span class="glyphicon glyphicon-flag"></span> {{cityOption}}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
 							</div>
 						</div>
 					</form>
-					
-					<div class="panel panel-default" ng-repeat="city in cts.cities" ng-controller="WeatherController as wthr" ng-init="wthr.initiate(city)">
-						<div class="panel-heading">
-							<button type="button" class="close pull-left" ng-click="cts.removeCity(city)"><span aria-hidden="true">&times;</span></button>
-							<strong>{{wthr.city}}, {{wthr.country}} </strong>
-							<span class="badge pull-right">{{wthr.temperature}} &deg;C</span>
-						</div>
-						<div class="panel-body">
-							<img class="icon pull-right" ng-src="img/{{wthr.icon}}" alt="{{wthr.weather}}" />
-							<div><strong>Temperature: </strong>{{wthr.temperature}}&deg;C</div>
-							<div><strong>Pressure: </strong>{{wthr.pressure}} hPa</div>
-							<div><strong>Humidity: </strong>{{wthr.humidity}}%</div>
-							<div><strong>Weather: </strong>{{wthr.weather}}</div>
-						</div>
-					</div>
-					
-				</div>
-				<div class="col-md-4"> </div>
+
+			    </div>
+			    <div class="col-md-4"> </div>
+		    </div>
+            <div class="row">
+
+                <div class="col-md-4" ng-repeat="(cityName, city) in cts.cities">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <button type="button" class="close pull-left" ng-click="cts.removeCity(cityName)"><span aria-hidden="true">&times;</span></button>
+                            <strong>{{city.name}}, {{city.country}} </strong>
+                            <span class="badge pull-right">{{city.temperature}} &deg;C</span>
+                        </div>
+                        <div class="panel-body">
+                            <img class="icon pull-right" ng-src="img/{{city.icon}}" alt="{{city.weather}}" />
+                            <div><strong>Temperature: </strong>{{city.temperature}}&deg;C</div>
+                            <div><strong>Pressure: </strong>{{city.pressure}} hPa</div>
+                            <div><strong>Humidity: </strong>{{city.humidity}}%</div>
+                            <div><strong>Weather: </strong>{{city.weather}}</div>
+                        </div>
+                    </div>
+                </div>
+
 			</div>
 		</div>
 	</body>
