@@ -93,6 +93,10 @@
             this.forecastCurrentDate = this.forecastDates[0];
         };
 
+        def.removeForecast = function(){
+            this.forecast = {};
+        };
+
         return new WeatherService();
     }]);
 

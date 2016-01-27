@@ -52,6 +52,7 @@
 		    <div class="row" ng-controller="ForecastController as fct">
                 <div class="panel panel-default" ng-show="fct.weather.forecast.weather" >
                     <div class="panel-heading">
+                        <button type="button" class="close pull-left" ng-click="fct.removeForecast()"><span aria-hidden="true">&times;</span></button>
                         5 Day Weather Forecast:
                         <strong>{{fct.weather.forecast.city}}, {{fct.weather.forecast.country}}</strong>
                     </div>
@@ -67,13 +68,13 @@
                             <tbody>
                                 <tr>
                                     <td ng-repeat="time in fct.weather.timeScale">
-                                        <div class="list-group" ng-show="fct.weather.forecast.weather[fct.weather.forecastCurrentDate][time]">
+                                        <div class="list-group" ng-show="fct.weather.forecast.weather[fct.date][time]">
                                             <a class="list-group-item">
-                                                <img class="small-icon" ng-src="img/{{fct.weather.forecast.weather[fct.weather.forecastCurrentDate][time].icon}}" />
-                                                <small><span class="badge pull-left">{{fct.weather.forecast.weather[fct.weather.forecastCurrentDate][time].temperature}}&deg;C</span><br /></small>
-                                                <small><span class="glyphicon glyphicon-dashboard"></span> {{fct.weather.forecast.weather[fct.weather.forecastCurrentDate][time].pressure}} hPa<br /></small>
-                                                <small><span class="glyphicon glyphicon-tint"></span> {{fct.weather.forecast.weather[fct.weather.forecastCurrentDate][time].humidity}}%<br /></small>
-                                                <small>{{fct.weather.forecast.weather[fct.weather.forecastCurrentDate][time].weather}}</small>
+                                                <img class="small-icon" ng-src="img/{{fct.weather.forecast.weather[fct.date][time].icon}}" />
+                                                <small><span class="badge pull-left">{{fct.weather.forecast.weather[fct.date][time].temperature}}&deg;C</span><br /></small>
+                                                <small><span class="glyphicon glyphicon-dashboard"></span> {{fct.weather.forecast.weather[fct.date][time].pressure}} hPa<br /></small>
+                                                <small><span class="glyphicon glyphicon-tint"></span> {{fct.weather.forecast.weather[fct.date][time].humidity}}%<br /></small>
+                                                <small>{{fct.weather.forecast.weather[fct.date][time].weather}}</small>
                                             </a>
                                         </div>
                                     </td>
@@ -85,7 +86,7 @@
                                 <tr>
                                     <th class="text-center" ng-repeat="date in fct.weather.forecastDates">
                                         <div class="list-group">
-                                            <a class="list-group-item clickable" ng-class="{'date-selected': date == fct.weather.forecastCurrentDate}" ng-click="fct.weather.forecastCurrentDate = date">
+                                            <a class="list-group-item clickable" ng-class="{'date-selected': date == fct.date}" ng-click="fct.setDate(date)">
                                                 <span class="glyphicon glyphicon-calendar"></span> {{date | date:'EEE'}} <br /><small>{{date | date:'MMM dd yyyy'}}</small>
                                             </a>
                                         </div>
