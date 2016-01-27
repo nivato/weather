@@ -12,6 +12,7 @@
 		<script src="js/lib/angular.min.js"></script>
 		<script src="js/app.js"></script>
 		<script src="js/controllers/cities.js"></script>
+		<script src="js/controllers/forecast.js"></script>
 		<script src="js/services/weather.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/weather.css">
@@ -48,113 +49,31 @@
 			    <div class="col-md-4"> </div>
 		    </div>
 
-		    <div class="row">
-                <div class="panel panel-default">
+		    <div class="row" ng-controller="ForecastController as fct">
+                <div class="panel panel-default" ng-show="fct.weather.forecast.weather" >
                     <div class="panel-heading">
                         5 Day Weather Forecast:
-                        <strong>Kyiv, UA </strong>
+                        <strong>{{fct.weather.forecast.city}}, {{fct.weather.forecast.country}}</strong>
                     </div>
                     <div class="panel-body">
         		        <table class="table">
                             <thead>
                                 <tr>
-                                    <th class="text-center text-muted"><span class="glyphicon glyphicon-time"></span> 00:00</th>
-                                    <th class="text-center text-muted"><span class="glyphicon glyphicon-time"></span> 03:00</th>
-                                    <th class="text-center text-muted"><span class="glyphicon glyphicon-time"></span> 06:00</th>
-                                    <th class="text-center text-muted"><span class="glyphicon glyphicon-time"></span> 09:00</th>
-                                    <th class="text-center text-muted"><span class="glyphicon glyphicon-time"></span> 12:00</th>
-                                    <th class="text-center text-muted"><span class="glyphicon glyphicon-time"></span> 15:00</th>
-                                    <th class="text-center text-muted"><span class="glyphicon glyphicon-time"></span> 18:00</th>
-                                    <th class="text-center text-muted"><span class="glyphicon glyphicon-time"></span> 21:00</th>
+                                    <th class="text-center text-muted" ng-repeat="time in fct.weather.timeScale">
+                                        <span class="glyphicon glyphicon-time"></span> {{time}}
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>
-                                        <div class="list-group">
+                                    <td ng-repeat="time in fct.weather.timeScale">
+                                        <div class="list-group" ng-show="fct.weather.forecast.weather[fct.weather.forecastCurrentDate][time]">
                                             <a class="list-group-item">
-                                                <img class="small-icon" ng-src="img/09n.png" />
-                                                <small><span class="badge pull-left">20 &deg;C</span><br /></small>
-                                                <small><span class="glyphicon glyphicon-dashboard"></span> 1023 hPa<br /></small>
-                                                <small><span class="glyphicon glyphicon-tint"></span> 100%<br /></small>
-                                                <small>Drizzle (light intensity drizzle)</small>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="list-group">
-                                            <a class="list-group-item">
-                                                <img class="small-icon" ng-src="img/09n.png" />
-                                                <small><span class="badge pull-left">20 &deg;C</span><br /></small>
-                                                <small><span class="glyphicon glyphicon-dashboard"></span> 1023 hPa<br /></small>
-                                                <small><span class="glyphicon glyphicon-tint"></span> 100%<br /></small>
-                                                <small>Drizzle (light intensity drizzle)</small>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="list-group">
-                                            <a class="list-group-item">
-                                                <img class="small-icon" ng-src="img/09n.png" />
-                                                <small><span class="badge pull-left">20 &deg;C</span><br /></small>
-                                                <small><span class="glyphicon glyphicon-dashboard"></span> 1023 hPa<br /></small>
-                                                <small><span class="glyphicon glyphicon-tint"></span> 100%<br /></small>
-                                                <small>Drizzle (light intensity drizzle)</small>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="list-group">
-                                            <a class="list-group-item">
-                                                <img class="small-icon" ng-src="img/09n.png" />
-                                                <small><span class="badge pull-left">20 &deg;C</span><br /></small>
-                                                <small><span class="glyphicon glyphicon-dashboard"></span> 1023 hPa<br /></small>
-                                                <small><span class="glyphicon glyphicon-tint"></span> 100%<br /></small>
-                                                <small>Drizzle (light intensity drizzle)</small>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="list-group">
-                                            <a class="list-group-item">
-                                                <img class="small-icon" ng-src="img/09n.png" />
-                                                <small><span class="badge pull-left">20 &deg;C</span><br /></small>
-                                                <small><span class="glyphicon glyphicon-dashboard"></span> 1023 hPa<br /></small>
-                                                <small><span class="glyphicon glyphicon-tint"></span> 100%<br /></small>
-                                                <small>Drizzle (light intensity drizzle)</small>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="list-group">
-                                            <a class="list-group-item">
-                                                <img class="small-icon" ng-src="img/09n.png" />
-                                                <small><span class="badge pull-left">20 &deg;C</span><br /></small>
-                                                <small><span class="glyphicon glyphicon-dashboard"></span> 1023 hPa<br /></small>
-                                                <small><span class="glyphicon glyphicon-tint"></span> 100%<br /></small>
-                                                <small>Drizzle (light intensity drizzle)</small>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="list-group">
-                                            <a class="list-group-item">
-                                                <img class="small-icon" ng-src="img/09n.png" />
-                                                <small><span class="badge pull-left">20 &deg;C</span><br /></small>
-                                                <small><span class="glyphicon glyphicon-dashboard"></span> 1023 hPa<br /></small>
-                                                <small><span class="glyphicon glyphicon-tint"></span> 100%<br /></small>
-                                                <small>Drizzle (light intensity drizzle)</small>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="list-group">
-                                            <a class="list-group-item">
-                                                <img class="small-icon" ng-src="img/09n.png" />
-                                                <small><span class="badge pull-left">20 &deg;C</span><br /></small>
-                                                <small><span class="glyphicon glyphicon-dashboard"></span> 1023 hPa<br /></small>
-                                                <small><span class="glyphicon glyphicon-tint"></span> 100%<br /></small>
-                                                <small>Drizzle (light intensity drizzle)</small>
+                                                <img class="small-icon" ng-src="img/{{fct.weather.forecast.weather[fct.weather.forecastCurrentDate][time].icon}}" />
+                                                <small><span class="badge pull-left">{{fct.weather.forecast.weather[fct.weather.forecastCurrentDate][time].temperature}}&deg;C</span><br /></small>
+                                                <small><span class="glyphicon glyphicon-dashboard"></span> {{fct.weather.forecast.weather[fct.weather.forecastCurrentDate][time].pressure}} hPa<br /></small>
+                                                <small><span class="glyphicon glyphicon-tint"></span> {{fct.weather.forecast.weather[fct.weather.forecastCurrentDate][time].humidity}}%<br /></small>
+                                                <small>{{fct.weather.forecast.weather[fct.weather.forecastCurrentDate][time].weather}}</small>
                                             </a>
                                         </div>
                                     </td>
@@ -164,45 +83,10 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th class="text-center">
+                                    <th class="text-center" ng-repeat="date in fct.weather.forecastDates">
                                         <div class="list-group">
-                                            <a class="list-group-item date-selected">
-                                                <span class="glyphicon glyphicon-calendar"></span> Mon <br /><small>Mar 25 2016</small>
-                                            </a>
-                                        </div>
-                                    </th>
-                                    <th class="text-center">
-                                        <div class="list-group">
-                                            <a class="list-group-item">
-                                                <span class="glyphicon glyphicon-calendar"></span> Tue <br /><small>Mar 26 2016</small>
-                                            </a>
-                                        </div>
-                                    </th>
-                                    <th class="text-center">
-                                        <div class="list-group">
-                                            <a class="list-group-item">
-                                                <span class="glyphicon glyphicon-calendar"></span> Wed <br /><small>Mar 27 2016</small>
-                                            </a>
-                                        </div>
-                                    </th>
-                                    <th class="text-center">
-                                        <div class="list-group">
-                                            <a class="list-group-item">
-                                                <span class="glyphicon glyphicon-calendar"></span> Thu <br /><small>Mar 28 2016</small>
-                                            </a>
-                                        </div>
-                                    </th>
-                                    <th class="text-center">
-                                        <div class="list-group">
-                                            <a class="list-group-item">
-                                                <span class="glyphicon glyphicon-calendar"></span> Fri <br /><small>Mar 29 2016</small>
-                                            </a>
-                                        </div>
-                                    </th>
-                                    <th class="text-center">
-                                        <div class="list-group">
-                                            <a class="list-group-item">
-                                                <span class="glyphicon glyphicon-calendar"></span> Sat <br /><small>Mar 30 2016</small>
+                                            <a class="list-group-item clickable" ng-class="{'date-selected': date == fct.weather.forecastCurrentDate}" ng-click="fct.weather.forecastCurrentDate = date">
+                                                <span class="glyphicon glyphicon-calendar"></span> {{date | date:'EEE'}} <br /><small>{{date | date:'MMM dd yyyy'}}</small>
                                             </a>
                                         </div>
                                     </th>

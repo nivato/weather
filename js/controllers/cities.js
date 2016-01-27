@@ -19,7 +19,7 @@
         };
 
         this.getForecast = function(city, country){
-            $weather.forecast(city, country);
+            $weather.getForecast(city, country);
         };
 
     }]);

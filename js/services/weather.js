@@ -7,7 +7,10 @@
             this.units = 'metric';
             this.key = 'c8367896c029db37f610ee38746ee03e';
             this.cityOptions = ['Lviv', 'Kiev', 'London', 'New York', 'Warsaw', 'Paris', 'Berlin'];
-            this.forecastCity = undefined;
+            this.timeScale = ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'];
+            this.forecast = {};
+            this.forecastDates = [];
+            this.forecastCurrentDate = '';
             this.cities = {};
             this.defaultCity = {
                 name: 'N/A',
@@ -22,12 +25,12 @@
         var def = WeatherService.prototype;
 
         def.add = function(cityName){
-            var weather = this;
+            var service = this;
             if (cityName.replace(/\s+/, '').length > 0){
                 $http.get(this.url + '/weather?q=' + cityName.replace(' ', '+') + '&units=' + this.units + '&APPID=' + this.key)
                     .success(function(data){
                         if (data.cod && data.cod === 200){
-                            var city = angular.copy(weather.defaultCity);
+                            var city = angular.copy(service.defaultCity);
                             city.name = data.name;
                             city.country = data.sys.country;
                             city.temperature = data.main.temp.toFixed(0);
@@ -35,8 +38,8 @@
                             city.humidity = data.main.humidity;
                             city.weather = data.weather[0].main + ' (' + data.weather[0].description + ')';
                             city.icon = data.weather[0].icon + '.png';
-                            weather.cities[city.name] = city;
-                            weather.addCityOption(cityName);
+                            service.cities[city.name] = city;
+                            service.addCityOption(cityName);
                         }
                     });
             }
@@ -52,13 +55,42 @@
             delete this.cities[cityName];
         };
 
-        def.forecast = function(cityName, countryCode){
+        def.getForecast = function(cityName, countryCode){
+            var service = this;
             $http.get(this.url + '/forecast?q=' + cityName.replace(' ', '+') + ',' + countryCode + '&units=' + this.units + '&APPID=' + this.key)
                 .success(function(data){
                     if (data.cod && data.cod == 200){
-                        console.log(data);
+                        service.prepareForecastData(cityName, countryCode, data);
                     }
                 });
+        };
+
+        def.prepareForecastData = function(cityName, countryCode, data){
+            var list = data.list;
+            var forecast = {
+                city: cityName,
+                country: countryCode,
+                weather: {}
+            };
+            var service = this;
+            var weather = forecast.weather;
+            for (var i = 0, len = list.length; i < len; i++){
+                var date = list[i].dt_txt.split(' ')[0];
+                var time = list[i].dt_txt.split(' ')[1].slice(0, 5);
+                if (!weather[date]){
+                    weather[date] = {};
+                }
+                weather[date][time] = {};
+                var details = weather[date][time];
+                details.temperature = list[i].main.temp.toFixed(0);
+                details.pressure = list[i].main.pressure;
+                details.humidity = list[i].main.humidity;
+                details.weather = list[i].weather[0].main;
+                details.icon = list[i].weather[0].icon + '.png';
+            }
+            this.forecast = forecast;
+            this.forecastDates = Object.keys(forecast.weather);
+            this.forecastCurrentDate = this.forecastDates[0];
         };
 
         return new WeatherService();
